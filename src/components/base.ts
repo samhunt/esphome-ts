@@ -20,7 +20,7 @@ export abstract class BaseComponent<L extends ListEntity = ListEntity, S extends
         private readonly commandInterface: CommandInterface,
     ) {
         this.commandInPipeline = new BehaviorSubject<boolean>(false);
-        this.state$ = this.state.pipe(filter((state?: S): state is S => state !== undefined));
+        this.state$ = this.state.pipe(filter((state?: S | undefined): state is S => state !== undefined));
         this.provideStateObservable(state);
         this.commandInPipeline
             .pipe(
